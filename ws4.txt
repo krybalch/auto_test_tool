@@ -1,0 +1,56 @@
+IMC-CON=/dev/ttyUSB2
+
+#Single-line comment
+
+#{ Start of Multi-line comment
+
+Switch filtering ON:
+FILT ON
+
+Switch filtering OFF:
+FILT OFF
+
+Switch prefix ON:
+PREF ON
+
+Switch prefix OFF:
+PREF OFF
+
+Echo line:
+ECHO ....
+
+Set Filter bypass key (all line starting with key will bypass filter)
+FKEY Some_filter_key
+
+#} End of multi-line comment
+
+
+FILT ON
+FKEY WS4KR:
+PREF OFF
+
+IMC-CON:
+
+ECHO Waitng for u-boot to start...
+WAIT_FOR Starting ML_A execution
+
+ECHO U-boot running...
+WAIT_FOR copy imc.itb.gz from NVMe
+
+ECHO Loading Kernel image from NVMe...
+WAIT_FOR Starting kernel ...
+
+ECHO Starting kernel...
+WAIT_FOR #### Running /work/scripts/post_init_app.sh
+
+WAIT_FOR mev-imc login
+
+WAIT_FOR DPCP APP: Incoming VIRTCHNL message size
+sleep 10
+WAIT_FOR DPCP APP: Incoming VIRTCHNL message size
+sleep 10
+WAIT_FOR DPCP APP: Incoming VIRTCHNL message size
+sleep 10
+ECHO Done!
+
+
